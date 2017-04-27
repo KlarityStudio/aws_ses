@@ -8,7 +8,7 @@ class EmailAWSClient
 
     }
 
-    function SendEmailToClient($recipient, $subject, $body, $cc_array)
+    function SendEmailToClient($recipient, $subject, $body, $cc)
     {
         // Replace sender@example.com with your "From" address.
         // This address must be verified with Amazon SES.
@@ -36,6 +36,7 @@ class EmailAWSClient
         define('SUBJECT', $subject);
         define('BODY', $body);
         define('CONTENT_TYPE', 'text/html;charset=UTF-8');
+        define('CC', $cc);
 
         require_once 'Mail.php';
 
@@ -43,8 +44,7 @@ class EmailAWSClient
             'From' => SENDER,
             'To' => RECIPIENT,
             'Subject' => SUBJECT,
-            'Content-Type' => CONTENT_TYPE,
-            'Cc' => implode(',', $cc_array));
+            'Content-Type' => CONTENT_TYPE);
 
         $smtpParams = array(
             'host' => HOST,
