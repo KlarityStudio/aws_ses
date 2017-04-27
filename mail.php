@@ -8,7 +8,7 @@ class EmailAWSClient
 
     }
 
-    function SendEmailToClient($recipient, $subject, $body)
+    function SendEmailToClient($recipient, $subject, $body, $cc_array)
     {
         // Replace sender@example.com with your "From" address.
         // This address must be verified with Amazon SES.
@@ -43,7 +43,8 @@ class EmailAWSClient
             'From' => SENDER,
             'To' => RECIPIENT,
             'Subject' => SUBJECT,
-            'Content-Type' => CONTENT_TYPE);
+            'Content-Type' => CONTENT_TYPE,
+            'Cc' => implode(',', $cc_array));
 
         $smtpParams = array(
             'host' => HOST,

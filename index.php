@@ -6,7 +6,13 @@ $mailer = new EmailAWSClient();
 
 $body = '<html><body>I wrestled a bear once</body></html>';
 
-$status = $mailer->SendEmailToClient('kurvinhendricks@gmail.com', 'thisisatestmailerhere', $body);
+$cc_array = array (
+    'kurvin@klarity.co.za',
+    'kurvindroid@gmail.com',
+    'kurvin@twitter.com'
+);
+
+$status = $mailer->SendEmailToClient('kurvinhendricks@gmail.com', 'thisisatestmailerhere', $body, $cc_array);
 
 if($status === 0) {
     echo 'Good to go';
