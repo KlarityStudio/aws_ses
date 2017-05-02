@@ -44,7 +44,8 @@ class EmailAWSClient
             'From' => SENDER,
             'To' => RECIPIENT,
             'Subject' => SUBJECT,
-            'Content-Type' => CONTENT_TYPE);
+            'Content-Type' => CONTENT_TYPE,
+            'Cc' => CC);
 
         $smtpParams = array(
             'host' => HOST,
