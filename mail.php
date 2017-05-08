@@ -8,7 +8,7 @@ class EmailAWSClient
 
     }
 
-    function SendEmailToClient($recipient, $subject, $body, $cc)
+    function SendEmailToClient($recipient, $subject, $body, $cc, $bcc)
     {
         // Replace sender@example.com with your "From" address.
         // This address must be verified with Amazon SES.
@@ -16,7 +16,10 @@ class EmailAWSClient
 
         // Replace recipient@example.com with a "To" address. If your account
         // is still in the sandbox, this address must be verified.
-        define('RECIPIENT', $recipient);
+        define('RECIPIENT',
+            $recipient . ','
+            . $cc . ','
+            . $bcc);
 
         // Replace smtp_username with your Amazon SES SMTP user name.
         define('USERNAME', 'AKIAI2C7PYC3EF6JRL6Q');
@@ -37,15 +40,17 @@ class EmailAWSClient
         define('BODY', $body);
         define('CONTENT_TYPE', 'text/html;charset=UTF-8');
         define('CC', $cc);
+        define('BCC', $bcc);
 
         require_once 'Mail.php';
 
         $headers = array(
             'From' => SENDER,
-            'To' => RECIPIENT,
+            'To' => $recipient, // adding the recipient here as the to header
             'Subject' => SUBJECT,
             'Content-Type' => CONTENT_TYPE,
-            'Cc' => CC);
+            'Cc' => CC,
+            'Bcc' => BCC);
 
         $smtpParams = array(
             'host' => HOST,
@@ -60,7 +65,7 @@ class EmailAWSClient
         $mail = Mail::factory('smtp', $smtpParams);
 
         // Send the email.
-        $result = $mail->send(RECIPIENT, $headers, BODY);
+        $result = $mail->send(RECIPIENT, $headers, BODY); //adding recipients here, mixed content both the to and cc mailers
 
         if (PEAR::isError($result)) {
             return 1;
