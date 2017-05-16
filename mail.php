@@ -22,10 +22,10 @@ class EmailAWSClient
             . $bcc);
 
         // Replace smtp_username with your Amazon SES SMTP user name.
-        define('USERNAME', 'AKIAI2C7PYC3EF6JRL6Q');
+        define('USERNAME', '###########');
 
         // Replace smtp_password with your Amazon SES SMTP password.
-        define('PASSWORD', 'AnX3YwqiA+sZgjXIo92h/VPEFiqV4LlChqz45fUeWS96');
+        define('PASSWORD', '##########');
 
         // If you're using Amazon SES in a region other than US West (Oregon),
         // replace email-smtp.us-west-2.amazonaws.com with the Amazon SES SMTP
